@@ -1,0 +1,58 @@
+import { Component, OnInit } from '@angular/core';
+import { <%= @name %>Service } from '../../shared/services/<%= @name.downcase %>.service';
+import { <%= @name %> } from '../../shared/services/<%= @name.downcase %>'; 
+import { ToastrService } from 'ngx-toastr';
+
+@Component({
+  selector: 'app-<%= @name.downcase %>-list',
+  templateUrl: './<%= @name.downcase %>-list.component.html',
+  styleUrls: ['./<%= @name.downcase %>-list.component.scss']
+})
+export class <%= @name %>ListComponent implements OnInit {
+
+  p: number = 1;
+  <%= @name.downcase %>s: <%= @name %>[];
+  hideWhenNo<%= @name %>: boolean = false;
+  noData: boolean = false;
+  preLoader: boolean = true;
+  
+  constructor(
+    public crudApi: <%= @name %>Service,
+    public toastr: ToastrService
+    ){ }
+
+  ngOnInit(): void {
+    this.dataState();
+    let s = this.crudApi.Get<%= @name %>sList(); 
+    s.snapshotChanges().subscribe(data => {
+      this.<%= @name.downcase %>s = [];
+      data.forEach(item => {
+        let a = item.payload.doc.data(); 
+        if (a != null){
+          a["id"] = item.payload.doc.id;
+          this.<%= @name.downcase %>s.push(a as <%= @name %>);
+        }
+        
+      });
+    })
+  }
+  dataState() {
+    this.crudApi.Get<%= @name %>sList().valueChanges().subscribe(data => {
+      this.preLoader = false;
+      if(data.length <= 0){
+        this.hideWhenNo<%= @name %> = false;
+        this.noData = true;
+      } else {
+        this.hideWhenNo<%= @name %> = true;
+        this.noData = false;
+      }
+    })
+  }
+  delete<%= @name %>(<%= @name.downcase %>: <%= @name %>) {
+    if (window.confirm('Are sure you want to delete this <%= @name.downcase %> ?')) { 
+      this.crudApi.Delete<%= @name %>(<%= @name.downcase %>.id)
+      this.toastr.success(<%= @name.downcase %>.email + ' successfully deleted!');
+    }
+  }
+
+}

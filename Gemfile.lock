@@ -1,0 +1,25 @@
+PATH
+  remote: .
+  specs:
+    ngcrud (0.0.1)
+      erb (~> 4.0.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    cgi (0.3.6)
+    erb (4.0.2)
+      cgi (>= 0.3.3)
+
+PLATFORMS
+  x86_64-darwin-21
+
+DEPENDENCIES
+  erb
+  ngcrud!
+
+RUBY VERSION
+   ruby 3.1.2p20
+
+BUNDLED WITH
+   2.3.7

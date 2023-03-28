@@ -1,0 +1,53 @@
+import { Injectable } from '@angular/core';
+import { <%= @name %> } from './<%= @name.downcase %>';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from '@angular/fire/compat/firestore';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class <%= @name %>Service {
+<%= @name.downcase %>Ref: AngularFirestoreDocument;
+<%= @name.downcase %>sRef: AngularFirestoreCollection;
+
+  constructor(private db: AngularFirestore) {
+    this.<%= @name.downcase %>sRef = db.collection('<%= @name.downcase %>s');
+  }
+  // Create <%= @name %>
+  add<%= @name %>(<%= @name.downcase %>: <%= @name %>) {
+    let <%= @name.downcase %>Obj =
+    {
+    <% @props.each do |k, v| %>
+      <%= k %>: <%= @name.downcase %>.<%= k %>,
+    <% end %>
+    };
+    // CHANGE THIS PART TO NAME THE DOCUMENT
+    this.<%= @name.downcase %>sRef.doc(<%= @name.downcase %>Obj.CHANGE_ME).set(<%= @name.downcase %>Obj);
+  }
+  // Fetch Single <%= @name %> Object
+  get<%= @name %>(id: string) {
+    this.<%= @name.downcase %>Ref = this.db.doc('<%= @name.downcase %>s/' + id);
+    return this.permissionRef;
+  }
+  // Fetch <%= @name %>s List
+  get<%= @name %>sList() {
+    this.<%= @name.downcase %>sRef = this.db.collection('<%= @name.downcase %>s');
+    return this.<%= @name.downcase %>sRef;
+  }
+  // Update <%= @name %> Object
+  update<%= @name %>(<%= @name.downcase %>: <%= @name %>) {
+    this.<%= @name.downcase %>Ref.update({
+        <% @props.each do |k| %>
+            <%= k %>: <%= @name.downcase %>.<%= k %>,
+        <% end %>
+    });
+  }
+  // Delete <%= @name %> Object
+  Delete<%= @name %>(id: string) {
+    this.<%= @name.downcase %>Ref = this.db.doc('<%= @name.downcase %>s/' + id);
+    this.<%= @name.downcase %>Ref.delete();
+  }
+}

@@ -1,0 +1,67 @@
+import { Component, OnInit } from '@angular/core';
+import { <%= @name %>Service } from '../../shared/services/<%= @name.downcase %>.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-<%= @name.downcase %>-create',
+  templateUrl: './<%= @name.downcase %>-create.component.html',
+  styleUrls: ['./<%= @name.downcase %>-create.component.scss']
+})
+export class <%= @name %>CreateComponent implements OnInit {
+  public <%= @name.downcase %>FormGroup: FormGroup;
+  constructor(
+    public crudApi: <%= @name %>Service,
+    public fb: FormBuilder,
+    public toastr: ToastrService,
+    public router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.crudApi.Get<%= @name %>sList();
+    this.<%= @name.downcase %>FormGroup = this.fb.group({
+    <% @props.each do |k, v| %> 
+      <%= k %>: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+        ],
+      ],
+    <% end %>
+    });
+  }
+
+  <%= @name.downcase %>Form(): any {
+    this.<%= @name.downcase %>FormGroup = this.fb.group({
+    <% @props.each do |k, v| %> 
+      <%= k %>: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+        ],
+      ],
+    <% end %>
+    });
+  }
+
+  <% @props.each do |k, v| %>
+    get <%= k %>() {
+      return this.<%= @name.downcase %>FormGroup.get('<%= k %>');
+    }
+  <% end %>
+
+  ResetForm() {
+    this.<%= @name.downcase %>FormGroup.reset();
+  }
+
+  onSubmit(): void {
+    this.crudApi.add<%= @name %>(this.<%= @name.downcase %>FormGroup.value);
+    this.toastr.success(
+      this.<%= @name.downcase %>FormGroup.controls['email'].value + ' successfully added!'
+    );
+    setTimeout(()=>this.router.navigate(['<%= @name.downcase %>-list']), 2000);
+  }
+}

@@ -1,0 +1,17 @@
+<form [formGroup]="<%= @name.downcase %>FormGroup" (ngSubmit)="onSubmit()" novalidate>
+  <% @props.each do |k, v| %>
+    <div class="mb-3">
+      <label><%= k.to_s.capitalize %></label>
+      <input type="text" formControlName="<%= k %>" class="form-control" required>
+    </div>
+  <% end %>
+  <div class="mb-3">
+      <button 
+        type="submit" 
+        class="btn btn-primary" 
+        [disabled]="!<%= @name.downcase %>FormGroup.valid"
+        >
+          Create
+      </button>
+  </div>
+</form>
