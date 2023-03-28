@@ -5,17 +5,8 @@ Gem::Specification.new do |s|
   s.description = "A rails-like Angular CRUD Generator"
   s.authors     = ["Diego Orozco"]
   s.email       = "mdorozcog@gmail.com"
-  s.files       = [
-    "bin/*",
-    "lib/**/*.rb",
-    "lib/**/*.erb",
-    "lib/**/*.rake",
-    "Gemfile",
-    "Rakefile",
-    "README.md",
-    "LICENSE",
-    "CHANGELOG.md"
-  ]
+  s.files = Dir['lib/**/*.rb'] + Dir['bin/*']
+  s.files += Dir['[A-Z]*']
   s.homepage    =
     "https://rubygems.org/gems/ngcrud"
   s.license       = "MIT"
