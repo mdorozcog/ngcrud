@@ -1,8 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'erb'
-require_relative 'lib/resource_model'
-require_relative 'lib/resource_crud'
+require_relative '../lib/resource_crud'
 
 if ARGV.count < 2
   p "You need to provide at least 2 params: ResourceName field:type"
