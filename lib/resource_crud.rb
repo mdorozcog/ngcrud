@@ -1,8 +1,6 @@
 require 'fileutils'
 
 class ResourceCrud
-  KLASSES = %w[interface service create edit list].freeze
-
   def initialize(name, **props)
     @name = name
     @props = props
