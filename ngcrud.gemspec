@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.email       = "mdorozcog@gmail.com"
   s.files       = Dir["{bin,lib,test}/**/*", "README.md", "LICENSE", "Rakefile"]
   s.homepage    =
-    "https://rubygems.org/gems/ngcrud"
+    "https://github.com/mdorozcog/ngcrud"
   s.license       = "MIT"
   s.platform              = Gem::Platform::RUBY
   s.required_ruby_version = ">= 3.1.2"
