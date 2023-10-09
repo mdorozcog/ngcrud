@@ -8,6 +8,7 @@ class ResourceCrud
   end
   
   def generator
+    gem_path = Gem::Specification.find_by_name("ngcrud").gem_dir
     dirname = File.dirname("src/app/features/#{@name.downcase}")
     unless File.directory?(dirname)
       FileUtils::mkdir_p("src/app/features/#{@name.downcase}/#{@name.downcase}-create")
@@ -15,31 +16,31 @@ class ResourceCrud
     end
 
     p "Generating interface..."
-    interface = ERB.new(File.open("lib/templates/resource_interface.erb").read)
+    interface = ERB.new(File.open("#{gem_path}/lib/templates/resource_interface.erb").read)
     interface_file = File.new("./src/app/features/#{@name.downcase}/#{@name.downcase}.ts", "w")
     interface_file.write(interface.result(get_binding))
     interface_file.close
     p "Generating service..."
-    service = ERB.new(File.open("lib/templates/resource_service.erb").read)
+    service = ERB.new(File.open("#{gem_path}/lib/templates/resource_service.erb").read)
     service_file = File.new("./src/app/features/#{@name.downcase}/#{@name.downcase}.service.ts", "w")
     service_file.write(service.result(get_binding))
     service_file.close
 
     p "Generating components..."
-    create_html = ERB.new(File.open("lib/templates/components/resource_create_html.erb").read)
+    create_html = ERB.new(File.open("#{gem_path}/lib/templates/components/resource_create_html.erb").read)
     file_html = File.new("./src/app/features/#{@name.downcase}/#{@name.downcase}-create/#{@name.downcase}-create.component.html", "w")
     file_html.write(create_html.result(get_binding))
     file_html.close
-    create_ts = ERB.new(File.open("lib/templates/components/resource_create_ts.erb").read)
+    create_ts = ERB.new(File.open("#{gem_path}/lib/templates/components/resource_create_ts.erb").read)
     file_ts = File.new("./src/app/features/#{@name.downcase}/#{@name.downcase}-create/#{@name.downcase}-create.component.ts", "w")
     file_ts.write(create_ts.result(get_binding))
     file_ts.close
 
-    list_html = ERB.new(File.open("lib/templates/components/resource_list_html.erb").read)
+    list_html = ERB.new(File.open("#{gem_path}/lib/templates/components/resource_list_html.erb").read)
     file_html = File.new("./src/app/features/#{@name.downcase}/#{@name.downcase}-list/#{@name.downcase}-list.component.html", "w")
     file_html.write(list_html.result(get_binding))
     file_html.close
-    list_ts = ERB.new(File.open("lib/templates/components/resource_list_ts.erb").read)
+    list_ts = ERB.new(File.open("#{gem_path}/lib/templates/components/resource_list_ts.erb").read)
     file_ts = File.new("./src/app/features/#{@name.downcase}/#{@name.downcase}-list/#{@name.downcase}-list.component.ts", "w")
     file_ts.write(list_ts.result(get_binding))
     file_ts.close
