@@ -7,7 +7,7 @@
     class="btn btn-success"
     *ngIf="hideWhenNo<%= @name %>"
   >
-    Add Student
+    Add <%= @name %>
   </a>
 </div>
 <div class="pricing-header mx-auto">
@@ -15,7 +15,7 @@
     <img src="assets/preloader.gif" class="preloader-icon" alt="No student" />
   </div>
   <div class="no-data text-center" *ngIf="noData">
-    <img src="assets/no-<%= @name.downcase %>.svg" class="nodata-msg" alt="No student" />
+    <img src="assets/no-<%= @name.downcase %>.svg" class="nodata-msg" alt="No <%= @name %>" />
     <p class="nodata-msg">No <%= @name.downcase %> added yet!</p>
     <a routerLink="/<%= @name.downcase %>-create" class="btn btn-success"> Add <%= @name.downcase %> </a>
   </div>
