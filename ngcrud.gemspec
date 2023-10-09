@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "ngcrud"
-  s.version     = "0.0.1"
+  s.version     = "0.0.2"
   s.summary     = "Angular CRUD Generator"
   s.description = "A rails-like Angular CRUD Generator"
   s.authors     = ["Diego Orozco"]
