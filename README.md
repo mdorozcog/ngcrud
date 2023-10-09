@@ -25,11 +25,14 @@ Suppose you want to generate Angular code for a "Contacts" model with the follow
 ngcrud Contacts name:string telephone:string birth_date:date active:boolean email_marketing:boolean
 ```
 
-This will generate the following files and code:
+This will generate inside src/app/features/contacts the following files and code:
 
-- contacts.component.ts: Angular component
-- contacts.service.ts: Angular service
-- contacts-routing.module.ts: Angular routing module
+- contact.ts - Resource interface typescript
+- contacts.service.ts - The service
+- /contacts-create/contacts-create.component.html
+- /contacts-create/contacts-create.component.ts
+- /contacts-list/contacts-list.component.html
+- /contacts-list/contacts-list.component.ts
 
 ## License
 
